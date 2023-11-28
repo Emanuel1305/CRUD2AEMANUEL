@@ -312,7 +312,7 @@
             // 
             // btnSalvar
             // 
-            this.btnSalvar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnSalvar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btnSalvar.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSalvar.Location = new System.Drawing.Point(6, 15);
             this.btnSalvar.Name = "btnSalvar";
@@ -350,6 +350,7 @@
             this.btnExibir.TabIndex = 13;
             this.btnExibir.Text = "Exibir";
             this.btnExibir.UseVisualStyleBackColor = true;
+            this.btnExibir.Click += new System.EventHandler(this.btnExibir_Click);
             // 
             // btnCancelar
             // 
