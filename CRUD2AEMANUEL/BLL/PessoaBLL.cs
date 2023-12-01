@@ -9,9 +9,22 @@ using CRUD2AEMANUEL.Model;
 
 namespace CRUD2AEMANUEL.BLL
 {
-    public class PessoaBLL
+    public class PessoaBLL 
     {
         PessoaDAL pessoaDAL = new PessoaDAL();
+        //Método para alterar
+        public void Alterar(Pessoa pessoa)
+        {
+            try
+            {
+                pessoaDAL.Alterar(pessoa);
+            }
+            catch (Exception erro)
+            {
+
+                throw erro;
+            }
+        }
         public void Salvar(Pessoa pessoa)
         {
             try

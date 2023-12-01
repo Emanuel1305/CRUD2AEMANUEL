@@ -19,6 +19,81 @@ namespace CRUD2AEMANUEL
             InitializeComponent();
         }
 
+        //Método Limpar
+        public void Limpar()
+        {
+            txtCodigo.Clear();
+            txtNome.Clear();
+            mtbCPF.Clear();
+            mtbCelular.Clear();
+            txtEndereco.Clear();
+            txtBairro.Clear();
+            txtCidade.Clear();
+            mtbCEP.Clear();
+            cbSexo.SelectedIndex = -1;
+            cbEstado.SelectedIndex = -1;
+            txtNome.BackColor = Color.White;
+            cbSexo.BackColor = Color.White;
+            mtbCPF.BackColor = Color.White;
+        }
+
+        //Método para editar 
+        public void Alterar(Pessoa pessoa)
+        {
+            PessoaBLL pessoaBLL = new PessoaBLL();
+            try
+            {
+                if (txtNome.Text.Trim() == string.Empty || txtNome.Text.Trim().Length < 3)
+                {
+                    MessageBox.Show("O campo NOME não pode ser vazio!", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    txtNome.BackColor = Color.LightCoral;
+                    cbSexo.BackColor = Color.White;
+                    mtbCPF.BackColor = Color.White;
+                }
+                else if (!mtbCPF.MaskCompleted)
+                {
+                    MessageBox.Show("O campo CPF não pode ser vazio!", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    txtNome.BackColor = Color.White;
+                    cbSexo.BackColor = Color.White;
+                    mtbCPF.BackColor = Color.LightCoral;
+                }
+                else if (cbSexo.Text == String.Empty)
+                {
+                    MessageBox.Show("O campo SEXO não pode ser vazio!", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    txtNome.BackColor = Color.White;
+                    cbSexo.BackColor = Color.LightCoral;
+                    mtbCPF.BackColor = Color.White;
+                }
+                else
+                {
+                    pessoa.Id = Convert.ToInt32(txtCodigo.Text);
+                    pessoa.Nome = txtNome.Text;
+                    pessoa.Nascimento = dtNascimento.Text;
+                    mtbCPF.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals; //Remove a Mascara
+                    pessoa.Cpf = mtbCPF.Text;
+                    mtbCelular.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals; //Remove a Mascara
+                    pessoa.Celular = mtbCelular.Text;
+                    pessoa.Endereco = txtEndereco.Text;
+                    pessoa.Bairro = txtBairro.Text;
+                    pessoa.Cidade = txtCidade.Text;
+                    pessoa.Estado = cbEstado.Text;
+                    mtbCEP.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals; //Remove a Mascara
+                    pessoa.Cep = mtbCEP.Text;
+                    pessoa.Sexo = cbSexo.Text;
+
+                    pessoaBLL.Alterar(pessoa);
+                    MessageBox.Show("Cadastro alterado com sucesso!", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Limpar();
+                    Listar();
+                }
+            }
+            catch (Exception erro)
+            {
+                MessageBox.Show("Erro ao alterar os dados!\n" + erro, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                throw;
+            }
+        }
+
         //Método para salvar
         private void Salvar(Pessoa pessoa)
         {
@@ -63,6 +138,7 @@ namespace CRUD2AEMANUEL
 
                 pessoasBLL.Salvar(pessoa);
                 MessageBox.Show("Cadastro Reaizado com sucesso!", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Limpar();
             }
         }
 
@@ -119,6 +195,32 @@ namespace CRUD2AEMANUEL
         {
             Pessoa pessoa = new Pessoa();
             Salvar(pessoa);
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            Limpar();
+        }
+
+        private void dataGridView_DoubleClick(object sender, EventArgs e)
+        {
+            txtCodigo.Text = dataGridView.CurrentRow.Cells[0].Value.ToString();
+            txtNome.Text = dataGridView.CurrentRow.Cells[1].Value.ToString();
+            dtNascimento.Text = dataGridView.CurrentRow.Cells[2].Value.ToString();
+            cbSexo.Text = dataGridView.CurrentRow.Cells[3].Value.ToString();
+            mtbCPF.Text = dataGridView.CurrentRow.Cells[4].Value.ToString();
+            mtbCelular.Text = dataGridView.CurrentRow.Cells[5].Value.ToString();
+            txtEndereco.Text = dataGridView.CurrentRow.Cells[6].Value.ToString();
+            txtBairro.Text = dataGridView.CurrentRow.Cells[7].Value.ToString();
+            txtCidade.Text = dataGridView.CurrentRow.Cells[8].Value.ToString();
+            cbEstado.Text = dataGridView.CurrentRow.Cells[9].Value.ToString();
+            mtbCEP.Text = dataGridView.CurrentRow.Cells[10].Value.ToString(); 
+        }
+
+        private void btnAlterar_Click(object sender, EventArgs e)
+        {
+            Pessoa pessoa = new Pessoa();
+            Alterar(pessoa);
         }
     }
 }

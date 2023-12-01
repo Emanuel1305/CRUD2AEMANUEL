@@ -14,6 +14,41 @@ namespace CRUD2AEMANUEL.DAL
     {
         MySqlCommand comando = null;
 
+        //Método para alterar
+        public void Alterar(Pessoa pessoa)
+        {
+            try
+            {
+                AbrirConexao();
+                comando = new MySqlCommand("UPDATE pessoa SET nome = @nome, nascimento = @nascimento, " +
+                    "sexo = @sexo, cpf = @cpf, celular = @celular, endereco = @endereco, bairro = @bairro, " +
+                    "cidade = @cidade, estado = @estado, cep = @cep WHERE id = @id", conexao);
+
+                comando.Parameters.AddWithValue("@id", pessoa.Id);
+                comando.Parameters.AddWithValue("@nome", pessoa.Nome);
+                comando.Parameters.AddWithValue("@Nascimento", DateTime.Parse(pessoa.Nascimento).ToString("yyyy-MM-dd"));
+                comando.Parameters.AddWithValue("@sexo", pessoa.Sexo);
+                comando.Parameters.AddWithValue("@cpf", pessoa.Cpf);
+                comando.Parameters.AddWithValue("@celular", pessoa.Celular);
+                comando.Parameters.AddWithValue("@endereco", pessoa.Endereco);
+                comando.Parameters.AddWithValue("@bairro", pessoa.Bairro);
+                comando.Parameters.AddWithValue("@cidade", pessoa.Cidade);
+                comando.Parameters.AddWithValue("@estado", pessoa.Estado);
+                comando.Parameters.AddWithValue("@cep", pessoa.Cep);
+
+                comando.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                FecharConexao();
+            }
+        }
+
         //método para salvar
         public void Salvar(Pessoa pessoa)
         {
