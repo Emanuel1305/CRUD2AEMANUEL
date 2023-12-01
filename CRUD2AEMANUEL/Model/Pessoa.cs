@@ -10,15 +10,15 @@ namespace CRUD2AEMANUEL.Model
     {
         //Encapsulamento
         public int Id { get; set; }
-        public int Nome { get; set; }
+        public string Nome { get; set; }
         public string Nascimento { get; set; }
-        public int Sexo { get; set; }
-        public int Cpf { get; set; }
-        public int Celular { get; set; }
-        public int Endereco { get; set; }
-        public int Bairro { get; set; }
-        public int Cidade { get; set; }
-        public int Estado { get; set; }
-        public int Cep { get; set; }
+        public string Sexo { get; set; }
+        public string Cpf { get; set; }
+        public string Celular { get; set; }
+        public string Endereco { get; set; }
+        public string Bairro { get; set; }
+        public string Cidade { get; set; }
+        public string Estado { get; set; }
+        public string Cep { get; set; }
     }
 }

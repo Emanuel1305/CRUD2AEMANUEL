@@ -16,7 +16,7 @@ namespace CRUD2AEMANUEL.BLL
         {
             try
             {
-
+                pessoaDAL.Salvar(pessoa);
             }
             catch (Exception erro)
             {

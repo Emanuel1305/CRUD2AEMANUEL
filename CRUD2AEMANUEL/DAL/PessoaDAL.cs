@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 using CRUD2AEMANUEL.Model;
 using System.Data;
+using System.Windows.Forms;
 
 namespace CRUD2AEMANUEL.DAL
 {
@@ -19,8 +20,9 @@ namespace CRUD2AEMANUEL.DAL
             try
             {
                 AbrirConexao();
-                comando = new MySqlCommand("INSER INTO pessoa(nome, nascimento, sexo, cpf, celular ,endereco, bairro, cidade, estado, cep) " +
-                "VALUES (@nome,  @nascimento, @sexo, @cpf, @celular, @endereco, @bairro, @cidade, @estado, @cep)", conexao);
+                comando = new MySqlCommand("INSERT INTO pessoa (nome, nascimento, sexo, cpf, celular ," +
+                    "endereco, bairro, cidade, estado, cep) VALUES (@nome,  @nascimento, @sexo, @cpf, " +
+                    "@celular, @endereco, @bairro, @cidade, @estado, @cep)", conexao);
 
                 comando.Parameters.AddWithValue("@nome", pessoa.Nome);
                 comando.Parameters.AddWithValue("@Nascimento", DateTime.Parse(pessoa.Nascimento).ToString("yyyy-MM-dd"));

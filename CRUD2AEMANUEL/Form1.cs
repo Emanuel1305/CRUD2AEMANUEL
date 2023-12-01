@@ -19,17 +19,50 @@ namespace CRUD2AEMANUEL
             InitializeComponent();
         }
 
+        //Método para salvar
         private void Salvar(Pessoa pessoa)
         {
             PessoaBLL pessoasBLL = new PessoaBLL();
-            try
-            {
 
+            if (txtNome.Text.Trim() == string.Empty || txtNome.Text.Trim().Length < 3)
+            {
+                MessageBox.Show("O campo NOME não pode ser vazio!", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                txtNome.BackColor = Color.LightCoral;
+                cbSexo.BackColor = Color.White;
+                mtbCPF.BackColor = Color.White;
             }
-            catch (Exception erro)
+            else if (!mtbCPF.MaskCompleted)
             {
+                MessageBox.Show("O campo CPF não pode ser vazio!", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                txtNome.BackColor = Color.White;
+                cbSexo.BackColor = Color.White;
+                mtbCPF.BackColor = Color.LightCoral;
+            }
+            else if (cbSexo.Text == String.Empty)
+            {
+                MessageBox.Show("O campo SEXO não pode ser vazio!", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                txtNome.BackColor = Color.White;
+                cbSexo.BackColor = Color.LightCoral;
+                mtbCPF.BackColor = Color.White;
+            }
+            else
+            {
+                pessoa.Nome = txtNome.Text;
+                pessoa.Nascimento = dtNascimento.Text;
+                mtbCPF.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals; //Remove a Mascara
+                pessoa.Cpf = mtbCPF.Text;
+                mtbCelular.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals; //Remove a Mascara
+                pessoa.Celular = mtbCelular.Text;
+                pessoa.Endereco = txtEndereco.Text;
+                pessoa.Bairro = txtBairro .Text;
+                pessoa.Cidade = txtCidade.Text;
+                pessoa.Estado = cbEstado.Text;
+                mtbCEP.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals; //Remove a Mascara
+                pessoa.Cep = mtbCEP.Text;
+                pessoa.Sexo = cbSexo.Text;
 
-                throw erro;
+                pessoasBLL.Salvar(pessoa);
+                MessageBox.Show("Cadastro Reaizado com sucesso!", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
