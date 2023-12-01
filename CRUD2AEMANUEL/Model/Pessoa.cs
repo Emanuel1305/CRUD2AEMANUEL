@@ -11,7 +11,7 @@ namespace CRUD2AEMANUEL.Model
         //Encapsulamento
         public int Id { get; set; }
         public int Nome { get; set; }
-        public int Nascimento { get; set; }
+        public string Nascimento { get; set; }
         public int Sexo { get; set; }
         public int Cpf { get; set; }
         public int Celular { get; set; }
